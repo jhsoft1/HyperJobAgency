@@ -16,13 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
-from menu.views import MySignupView, MyLoginView
+from menu.views import MySignupView, MyLoginView, home_view
+import vacancy, resume
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('menu/', include('menu.urls')),
+    path('home', home_view),
     path('vacancies/', include('vacancy.urls')),
+    path('vacancy/new', vacancy.views.new_view),
     path('resumes/', include('resume.urls')),
+    path('resume/new', resume.views.new_view),
     path('login', MyLoginView.as_view()),
     path('signup', MySignupView.as_view()),
     path('login/', RedirectView.as_view(url='/login')),

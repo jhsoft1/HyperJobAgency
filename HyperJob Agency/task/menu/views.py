@@ -5,6 +5,10 @@ from django.views.generic import CreateView
 
 
 def index_view(request):
+    return render(request, "menu/menu.html")
+
+
+def home_view(request):
     return render(request, "menu/home.html")
 
 
