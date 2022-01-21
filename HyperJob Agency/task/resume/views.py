@@ -1,4 +1,5 @@
 from django import forms
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from . import models
 
@@ -12,9 +13,12 @@ def new_view(request):
         new_resume_form = NewResumeForm()
         return render(request, "resume/new.html", {'new_resume_form': new_resume_form})
     else:
-        description = request.POST.get('description')
-        new_resume = models.Resume.objects.create(description=description, author=request.user)
-        return redirect('/')
+        if request.user.is_authenticated:
+            description = request.POST.get('description')
+            new_resume = models.Resume.objects.create(description=description, author=request.user)
+            return redirect('/')
+        else:
+            return HttpResponse(status=403)
 
 
 def index_view(request):

@@ -18,6 +18,7 @@ class HyperJobTestRunner(HyperJobTest):
         # 4 task
         HyperJobTest.check_signup,
         HyperJobTest.check_login,
+        HyperJobTest.check_logout,
         # 5 task
         HyperJobTest.check_create_resume_from_profile,
         HyperJobTest.check_forbid_to_create_vacancy,

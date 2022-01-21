@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
-from menu.views import MySignupView, MyLoginView, home_view
+from menu.views import MySignupView, MyLoginView, MyLogoutView, home_view
 import vacancy, resume
 
 urlpatterns = [
@@ -28,6 +28,7 @@ urlpatterns = [
     path('resumes/', include('resume.urls')),
     path('resume/new', resume.views.new_view),
     path('login', MyLoginView.as_view()),
+    path('logout', MyLogoutView.as_view()),
     path('signup', MySignupView.as_view()),
     path('login/', RedirectView.as_view(url='/login')),
     path('signup/', RedirectView.as_view(url='/signup')),

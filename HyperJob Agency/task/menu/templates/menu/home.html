@@ -6,7 +6,11 @@
 </head>
 <body>
     <h2>Profile Page</h2>
-    <div><a href="/resume/new">Create new resume</a></div>
-    <div><a href="/vacancy/new">Create new vacancy</a></div>
+    <div><form action="/resume/new" method="get">{% csrf_token %}
+        <button type="submit">New resume</button>
+    </form></div>
+    <div><form action="/vacancy/new" method="get">{% csrf_token %}
+        <button type="submit">New vacancy</button>
+    </form></div>
 </body>
 </html>

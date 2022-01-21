@@ -1,4 +1,5 @@
 from django import forms
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from . import models
 
@@ -16,6 +17,9 @@ def new_view(request):
         new_vacancy_form = NewVacancyForm()
         return render(request, "vacancy/new.html", {'new_vacancy_form': new_vacancy_form})
     else:
-        description = request.POST.get('description')
-        new_vacancy = models.Vacancy.objects.create(description=description, author=request.user)
-        return redirect('/')
+        if request.user.is_staff:
+            description = request.POST.get('description')
+            new_vacancy = models.Vacancy.objects.create(description=description, author=request.user)
+            return redirect('/')
+        else:
+            return HttpResponse(status=403)
