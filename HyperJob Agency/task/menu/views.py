@@ -1,5 +1,9 @@
-from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+# from django import forms
+from django.contrib.auth.models import User
+from django.forms import CharField, Form
+from .forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render
 from django.views.generic import CreateView
@@ -9,12 +13,12 @@ def index_view(request):
     return render(request, "menu/menu.html")
 
 
-class NewVacancyForm(forms.Form):
-    description = forms.CharField(label='Vacancy description')
+class NewVacancyForm(Form):
+    description = CharField(label='Vacancy description')
 
 
-class NewResumeForm(forms.Form):
-    description = forms.CharField(label='Resume description')
+class NewResumeForm(Form):
+    description = CharField(label='Resume description')
 
 
 def home_view(request):
@@ -38,5 +42,8 @@ class MyLogoutView(LogoutView):
 
 class MySignupView(CreateView):
     form_class = UserCreationForm
+    # form = UserCreationForm
+    # model = User
+    # fields = '__all__'
     success_url = 'login'
     template_name = 'menu/signup.html'
